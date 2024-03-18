@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/kabupaten', [WilayahController::class, 'getKab'])->name('kabupaten');
 Route::get('/kecamatan', [WilayahController::class, 'getKec'])->name('kecamatan');
 Route::get('/desa', [WilayahController::class, 'getDesa'])->name('desa');
+Route::get('/idDesa', [WilayahController::class, 'getID'])->name('idDesa');

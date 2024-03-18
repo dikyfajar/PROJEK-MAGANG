@@ -33,4 +33,11 @@ class WilayahController extends Controller
         $desa = Desa::where('id_kecamatan', $idKec)->get();
         return response()->json($desa);
     }
+
+    public function getID(Request $request)
+    {
+        $idDesa = $request->input('id');
+        $desa = Desa::where('id', $idDesa)->get();
+        return response()->json($desa);
+    }
 }

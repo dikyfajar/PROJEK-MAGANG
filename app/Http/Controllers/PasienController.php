@@ -48,7 +48,54 @@ class PasienController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $this->validate($request, [
+            'nama_pasien'   =>  'required|max:100',
+            'nik'           =>  'required',
+            'kk'            =>  'required',
+            'jkelamin'      =>  'required',
+            'tgl_lahir'     =>  'required',
+            'telp_pasien'   =>  'required',
+            'email'         =>  'nullable|varchar|max:100',
+            'prov_pas'   =>  'required',
+            'kab_pas'    =>  'required',
+            'kec_pas'    =>  'required',
+            'desa_pas'   =>  'required',
+            'alamat_pas'    =>  'required',
+            'id_desa_pas'   =>  'required',
+            'status_pasien' =>  'required',
+            'nama_pj'       =>  'required|max:100',
+            'status_pj'     =>  'required',
+            'telp_pj'       =>  'required',
+            'prov_pj'   =>  'required',
+            'kab_pj'    =>  'required',
+            'kec_pj'    =>  'required',
+            'desa_pj'   =>  'required',
+            'alamat_pj'    =>  'required',
+            'id_desa_pj'   =>  'required',
+        ]);
+
+        // model::create
+        Pasien::create([
+            'nama_pasien'   =>  $request->nama_pasien,
+            'nik'           =>  $request->nik,
+            'kk'            =>  $request->kk,
+            'jenis_kelamin' =>  $request->jkelamin,
+            'tgl_lahir'     =>  $request->tgl_lahir,
+            'telp_pasien'   =>  $request->telp_pasien,
+            'email'         =>  $request->email,
+            'alamat_pasien' =>  $request->alamat_pas . ", " . $request->desa_pas . ", " . $request->kec_pas . ", " . $request->kab_pas . ", " . $request->prov_pas,
+            'id_desa_pasien' =>  $request->id_desa_pas,
+            'nama_pj'       =>  $request->nama_pj,
+            'status_pj'     =>  $request->status_pj,
+            'telp_pj'       =>  $request->telp_pj,
+            'alamat_pj'     =>  $request->alamat_pj . ", " . $request->desa_pj . ", " . $request->kec_pj . ", " . $request->kab_pj . ", " . $request->prov_pj,
+            'id_desa_pj'    =>  $request->id_desa_pj,
+            'status'        =>  $request->status_pasien
+        ]);
+
+        // return redirect
+        return redirect()->route('pasien.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
 
     /**
